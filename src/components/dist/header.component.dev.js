@@ -43,8 +43,8 @@ function (_Component) {
         this.hide();
       }
 
-      var btn = document.querySelector('.get-started');
-      btn.addEventListener('click', startClickHandler.bind(this));
+      var btn = this.$el.querySelector(".js-header-start");
+      btn.addEventListener("click", buttonHandler.bind(this));
     }
   }]);
 
@@ -53,7 +53,7 @@ function (_Component) {
 
 exports.HeaderComponent = HeaderComponent;
 
-function startClickHandler() {
-  localStorage.setItem('visited', "true");
+function buttonHandler() {
+  localStorage.setItem("visited", JSON.stringify(true));
   this.hide();
 }

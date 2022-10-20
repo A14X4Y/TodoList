@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CreatePostsComponent = void 0;
+exports.LoaderComponent = void 0;
 
 var _component = require("../core/component");
 
@@ -21,18 +21,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var CreatePostsComponent =
+var LoaderComponent =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(CreatePostsComponent, _Component);
+  _inherits(LoaderComponent, _Component);
 
-  function CreatePostsComponent() {
-    _classCallCheck(this, CreatePostsComponent);
+  function LoaderComponent(id) {
+    _classCallCheck(this, LoaderComponent);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(CreatePostsComponent).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(LoaderComponent).call(this, id));
   }
 
-  return CreatePostsComponent;
+  return LoaderComponent;
 }(_component.Component);
 
-exports.CreatePostsComponent = CreatePostsComponent;
+exports.LoaderComponent = LoaderComponent;

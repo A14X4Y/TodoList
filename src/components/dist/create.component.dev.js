@@ -11,6 +11,8 @@ var _form = require("../core/form");
 
 var _validators = require("../core/validators");
 
+var _api = require("../services/api.service");
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -49,9 +51,9 @@ function (_Component) {
   _createClass(CreateComponent, [{
     key: "init",
     value: function init() {
-      this.$el.addEventListener('submit', submitHandler.bind(this));
+      this.$el.addEventListener("submit", submitHandler.bind(this));
       this.form = new _form.Form(this.$el, {
-        title: [_validators.Validators.required, _validators.Validators.minLength],
+        title: [_validators.Validators.required],
         fulltext: [_validators.Validators.required, _validators.Validators.minLength(10)]
       });
     }
@@ -63,15 +65,43 @@ function (_Component) {
 exports.CreateComponent = CreateComponent;
 
 function submitHandler(event) {
-  event.preventDefault();
+  var formData;
+  return regeneratorRuntime.async(function submitHandler$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          event.preventDefault();
 
-  if (this.form.isValid()) {
-    var formData = _objectSpread({
-      type: this.$el.type.value
-    }, this.form.value());
+          if (!this.form.isValid()) {
+            _context.next = 7;
+            break;
+          }
 
-    console.log('Sumbit', formData);
-  } else {
-    console.log('Не прошёл валидацию');
-  }
+          formData = _objectSpread({
+            type: this.$el.type.value
+          }, this.form.value(), {
+            date: getDateNow()
+          });
+          _context.next = 5;
+          return regeneratorRuntime.awrap(_api.apiService.createPost(formData));
+
+        case 5:
+          this.form.clear();
+          alert("запись создана в БД");
+
+        case 7:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, this);
+}
+
+function getDateNow() {
+  var dateObj = new Date();
+  var month = dateObj.getUTCMonth() + 1; //months from 1-12
+
+  var day = dateObj.getUTCDate();
+  var year = dateObj.getUTCFullYear();
+  return day + "." + month + "." + year;
 }

@@ -31,15 +31,19 @@ function (_Component) {
   _inherits(NavigationComponent, _Component);
 
   function NavigationComponent(id) {
+    var _this;
+
     _classCallCheck(this, NavigationComponent);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(NavigationComponent).call(this, id));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NavigationComponent).call(this, id));
+    _this.tabs = [];
+    return _this;
   }
 
   _createClass(NavigationComponent, [{
     key: "init",
     value: function init() {
-      this.$el.addEventListener('click', tabClickHandler.bind(this));
+      this.$el.addEventListener("click", tabClickHandler.bind(this));
     }
   }, {
     key: "registerTabs",
@@ -55,20 +59,18 @@ exports.NavigationComponent = NavigationComponent;
 
 function tabClickHandler(event) {
   event.preventDefault();
-  console.log(event);
-  console.log(this.$el);
 
-  if (event.target.classList.contains('tab')) {
-    Array.from(this.$el.querySelectorAll('.tab')).forEach(function (tab) {
-      tab.classList.remove('active');
+  if (event.target.classList.contains("tab")) {
+    Array.from(this.$el.querySelectorAll(".tab")).forEach(function (tab) {
+      tab.classList.remove("active");
     });
-    event.target.classList.add('active');
-    var activeTabs = this.tabs.find(function (tab) {
-      return tab.name === event.target.dataset.name;
+    event.target.classList.add("active");
+    var activeTab = this.tabs.find(function (t) {
+      return t.name === event.target.dataset.name;
     });
-    this.tabs.forEach(function (tab) {
-      return tab.component.hide();
+    this.tabs.forEach(function (t) {
+      return t.component.hide();
     });
-    activeTabs.component.show();
+    activeTab.component.show();
   }
 }

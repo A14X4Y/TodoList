@@ -33,17 +33,27 @@ function () {
       return value;
     }
   }, {
+    key: "clear",
+    value: function clear() {
+      var _this2 = this;
+
+      Object.keys(this.controls).forEach(function (control) {
+        _this2.form[control].value = '';
+      });
+    }
+  }, {
     key: "isValid",
     value: function isValid() {
-      var _this2 = this;
+      var _this3 = this;
 
       var isFormValid = true;
       Object.keys(this.controls).forEach(function (control) {
-        var validators = _this2.controls[control];
+        var validators = _this3.controls[control];
         var isValid = true;
         validators.forEach(function (validator) {
-          isValid = validator(_this2.form[control].value) && isValid;
+          isValid = validator(_this3.form[control].value) && isValid;
         });
+        !isValid ? setForm(_this3.form[control]) : cleanError(_this3.form[control]);
         isFormValid = isFormValid && isValid;
       });
       return isFormValid;
@@ -54,3 +64,18 @@ function () {
 }();
 
 exports.Form = Form;
+
+function setForm($control) {
+  cleanError($control);
+  var error = '<p class= "validation-error">Введите коректное значение</p>';
+  $control.classList.add("invalid");
+  $control.insertAdjacentHTML('afterend', error);
+}
+
+function cleanError($control) {
+  $control.classList.remove("invalid");
+
+  if ($control.nextSibling) {
+    $control.closest('.form-control').removeChild($control.nextSibling);
+  }
+}

@@ -25,14 +25,22 @@ function () {
     key: "init",
     value: function init() {}
   }, {
+    key: "onShow",
+    value: function onShow() {}
+  }, {
+    key: "onHide",
+    value: function onHide() {}
+  }, {
     key: "hide",
     value: function hide() {
-      this.$el.classList.add('hide');
+      this.$el.classList.add("hide");
+      this.onHide();
     }
   }, {
     key: "show",
     value: function show() {
-      this.$el.classList.remove('hide');
+      this.$el.classList.remove("hide");
+      this.onShow();
     }
   }]);
 
