@@ -80,14 +80,14 @@ function submitHandler(event) {
           formData = _objectSpread({
             type: this.$el.type.value
           }, this.form.value(), {
-            date: getDateNow()
+            date: new Date().toLocaleDateString("en-GB")
           });
           _context.next = 5;
           return regeneratorRuntime.awrap(_api.apiService.createPost(formData));
 
         case 5:
           this.form.clear();
-          alert("запись создана в БД");
+          alert("Запись успешно создана!");
 
         case 7:
         case "end":
@@ -95,13 +95,4 @@ function submitHandler(event) {
       }
     }
   }, null, this);
-}
-
-function getDateNow() {
-  var dateObj = new Date();
-  var month = dateObj.getUTCMonth() + 1; //months from 1-12
-
-  var day = dateObj.getUTCDate();
-  var year = dateObj.getUTCFullYear();
-  return day + "." + month + "." + year;
 }

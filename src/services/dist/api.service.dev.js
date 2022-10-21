@@ -29,8 +29,8 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              request = new Request(this.url + '/posts.json', {
-                method: 'post',
+              request = new Request(this.url + "/posts.json", {
+                method: "post",
                 body: JSON.stringify(post)
               });
               return _context.abrupt("return", useRequest(request));
@@ -48,27 +48,53 @@ function () {
       }, null, this, [[0, 5]]);
     }
   }, {
-    key: "fetchPost",
-    value: function fetchPost() {
+    key: "fetchPosts",
+    value: function fetchPosts() {
       var request;
-      return regeneratorRuntime.async(function fetchPost$(_context2) {
+      return regeneratorRuntime.async(function fetchPosts$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
               request = new Request("".concat(this.url, "/posts.json"), {
-                method: 'get'
+                method: "get"
               });
               return _context2.abrupt("return", useRequest(request));
 
             case 5:
               _context2.prev = 5;
               _context2.t0 = _context2["catch"](0);
-              console.log(_context2.t0);
+              console.error(_context2.t0);
 
             case 8:
             case "end":
               return _context2.stop();
+          }
+        }
+      }, null, this, [[0, 5]]);
+    }
+  }, {
+    key: "fetchPostById",
+    value: function fetchPostById(id) {
+      var request;
+      return regeneratorRuntime.async(function fetchPostById$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              request = new Request("".concat(this.url, "/posts/").concat(id, ".json"), {
+                method: "get"
+              });
+              return _context3.abrupt("return", useRequest(request));
+
+            case 5:
+              _context3.prev = 5;
+              _context3.t0 = _context3["catch"](0);
+              console.log(_context3.t0);
+
+            case 8:
+            case "end":
+              return _context3.stop();
           }
         }
       }, null, this, [[0, 5]]);
@@ -80,28 +106,28 @@ function () {
 
 function useRequest(request) {
   var response;
-  return regeneratorRuntime.async(function useRequest$(_context3) {
+  return regeneratorRuntime.async(function useRequest$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.next = 2;
+          _context4.next = 2;
           return regeneratorRuntime.awrap(fetch(request));
 
         case 2:
-          response = _context3.sent;
-          _context3.next = 5;
+          response = _context4.sent;
+          _context4.next = 5;
           return regeneratorRuntime.awrap(response.json());
 
         case 5:
-          return _context3.abrupt("return", _context3.sent);
+          return _context4.abrupt("return", _context4.sent);
 
         case 6:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   });
 }
 
-var apiService = new ApiService('https://todolist-8f9ce-default-rtdb.europe-west1.firebasedatabase.app/');
+var apiService = new ApiService("https://todolist-8f9ce-default-rtdb.europe-west1.firebasedatabase.app/");
 exports.apiService = apiService;

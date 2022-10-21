@@ -38,7 +38,7 @@ function () {
       var _this2 = this;
 
       Object.keys(this.controls).forEach(function (control) {
-        _this2.form[control].value = '';
+        _this2.form[control].value = "";
       });
     }
   }, {
@@ -69,13 +69,13 @@ function setForm($control) {
   cleanError($control);
   var error = '<p class= "validation-error">Введите коректное значение</p>';
   $control.classList.add("invalid");
-  $control.insertAdjacentHTML('afterend', error);
+  $control.insertAdjacentHTML("afterend", error);
 }
 
 function cleanError($control) {
   $control.classList.remove("invalid");
 
   if ($control.nextSibling) {
-    $control.closest('.form-control').removeChild($control.nextSibling);
+    $control.closest(".form-control").removeChild($control.nextSibling);
   }
 }
